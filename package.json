@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@testing-library/dom": "^7.24.5",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
@@ -10,16 +11,22 @@
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
+    "history": "^5.0.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-is": "^16.13.1",
+    "react-router-dom": "^6.0.0-beta.0",
     "react-scripts": "3.4.3",
+    "styled-components": "^5.2.0",
     "typescript": "~3.7.2"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint . --ext .jsx,.ts,.tsx",
+    "lint:f": "eslint . --ext .jsx,.ts,.tsx --fix"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -35,5 +42,22 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/react-router-dom": "^5.1.6",
+    "@types/styled-components": "^5.1.4",
+    "@types/yup": "^0.29.8",
+    "@typescript-eslint/eslint-plugin": "^4.4.1",
+    "@typescript-eslint/parser": "^4.4.1",
+    "eslint": "7.2.0",
+    "eslint-config-airbnb": "^18.2.0",
+    "eslint-config-prettier": "^6.12.0",
+    "eslint-import-resolver-typescript": "^2.3.0",
+    "eslint-plugin-import": "2.21.2",
+    "eslint-plugin-jsx-a11y": "6.3.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-react": "7.20.0",
+    "eslint-plugin-react-hooks": "4",
+    "prettier": "^2.1.2"
   }
 }
