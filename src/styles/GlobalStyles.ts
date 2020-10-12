@@ -17,13 +17,14 @@ export default createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
   }
-  *, button, input, textarea {
+  body, button, input, textarea {
     border: 0;
     outline: 0;
     background: none;
-    color: ${({ theme }) => theme.colors.grey};
+    color: ${({ theme }) => theme.colors.white};
     font-size: 1.6rem;
-    font-family: 'Lato', -apple-system, BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
+    font-weight: 600;
+    font-family: Nunito, sans-serif;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -37,8 +38,5 @@ export default createGlobalStyle`
   }
   ul, li {
     list-style: none;
-  }
-  h1, h2, h3, h4, h5, h6, strong {
-    font-weight: 500;
   }
 `

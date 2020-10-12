@@ -1,14 +1,16 @@
 export default {
   colors: {
-    primary: '#FF8700',
-    primaryDark: '#FF500F',
-    white: '#f5f6fa',
+    primary: '#00c7c7',
+    primaryDark: '#29b6d1',
+    white: '#fff',
     grey: '#8c91a5',
     greyLight: '#e8e9ec99',
     greyDark: '#6c757d',
     success: '#20c05c',
     error: '#fd4f48',
-    background: '#f5f6fa',
+    background: '#ebf2f5',
+    buttonLight: '#ffd666',
+    buttonHover: '#96feff',
   },
   shadows: {
     default: '0 0.5rem 2rem rgba(0, 0, 0, 0.08)',
@@ -31,6 +33,6 @@ export default {
     tiny: '0.2rem',
   },
   transition: {
-    default: '180ms ease-in-out',
+    default: '200ms ease-in-out',
   },
 } as const
