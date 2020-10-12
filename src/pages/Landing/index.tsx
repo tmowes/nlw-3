@@ -5,8 +5,10 @@ import {
   ContentWrapper,
   Logo,
   Main,
+  LeftSide,
   Title,
   SubTitle,
+  LandingImage,
   Location,
   City,
   State,
@@ -20,8 +22,13 @@ const Landing: React.FC = () => {
       <ContentWrapper>
         <Logo />
         <Main>
-          <Title>Leve felicidade para o mundo</Title>
-          <SubTitle>Visite orfanatos e mude o dia de muitas crianças.</SubTitle>
+          <LeftSide>
+            <Title>Leve felicidade para o mundo</Title>
+            <SubTitle>
+              Visite orfanatos e mude o dia de muitas crianças.
+            </SubTitle>
+          </LeftSide>
+          <LandingImage />
         </Main>
         <Location>
           <City>Timbó</City>

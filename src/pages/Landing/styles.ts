@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components'
 import { FiArrowRight } from 'react-icons/fi'
 
 import logoImg from '../../assets/logo.svg'
+import landingImg from '../../assets/landing.svg'
 
 export const Container = styled.div`
   display: flex;
@@ -29,8 +30,20 @@ export const Logo = styled.img.attrs({
 })``
 
 export const Main = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  margin-top: -64px;
+`
+export const LeftSide = styled.div`
   max-width: 350px;
 `
+export const LandingImage = styled.img.attrs({
+  src: landingImg,
+})`
+  margin-left: 64px;
+`
+
 export const Title = styled.h1`
   font-size: 76px;
   font-weight: 900;
@@ -47,7 +60,6 @@ export const Location = styled.div`
   top: 0;
   display: flex;
   flex-direction: column;
-
   font-size: 24px;
   line-height: 34px;
   text-align: right;
