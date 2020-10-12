@@ -5,7 +5,7 @@ import { Container } from './styles'
 const PageNotFound: React.FC = () => {
   return (
     <Container>
-      <h1>PageNotFound</h1>
+      <h1>Pagina não encontrada</h1>
     </Container>
   )
 }

@@ -34,7 +34,7 @@ const Landing: React.FC = () => {
           <City>Timbó</City>
           <State>Santa Catarina</State>
         </Location>
-        <EnterApp>
+        <EnterApp to="/app">
           <EnterAppIcon />
         </EnterApp>
       </ContentWrapper>

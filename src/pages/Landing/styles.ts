@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import { Link } from 'react-router-dom'
 import { FiArrowRight } from 'react-icons/fi'
 
 import logoImg from '../../assets/logo.svg'
@@ -69,7 +70,7 @@ export const City = styled.strong`
 `
 export const State = styled.p``
 
-export const EnterApp = styled.div`
+export const EnterApp = styled(Link)`
   ${({ theme }) => css`
     position: absolute;
     right: 0;
@@ -89,4 +90,6 @@ export const EnterApp = styled.div`
 `
 export const EnterAppIcon = styled(FiArrowRight).attrs({
   size: 36,
-})``
+})`
+  color: white;
+`

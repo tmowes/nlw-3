@@ -11,6 +11,9 @@ export default {
     background: '#ebf2f5',
     buttonLight: '#ffd666',
     buttonHover: '#96feff',
+    buttonSky: '#15c3d6',
+    buttonSkyHover: '#17d6eb',
+
   },
   shadows: {
     default: '0 0.5rem 2rem rgba(0, 0, 0, 0.08)',
