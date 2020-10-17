@@ -1,4 +1,4 @@
-/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable  */
 import React from 'react'
 import { Feather as Icon } from '@expo/vector-icons'
 
@@ -7,7 +7,7 @@ import { RoundedSquareButtonProps } from './types'
 
 const RoundedSquareButton: React.FC<RoundedSquareButtonProps> = ({
   onPress,
-  name,
+  icon,
   color,
   backgroundColor,
   size,
@@ -22,7 +22,7 @@ const RoundedSquareButton: React.FC<RoundedSquareButtonProps> = ({
         borderRadius: size / 2.8,
       }}
     >
-      <Icon name={name} size={size / 2} color={color} />
+      <Icon name={icon} size={size / 2} color={color} />
     </RoundedSquareContainer>
   )
 }

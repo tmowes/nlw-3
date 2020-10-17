@@ -17,8 +17,13 @@ import {
 
 const OrphanagesMap: React.FC = () => {
   const { navigate } = useNavigation()
+
   const handleNavigationToOrphanagesDetails = useCallback(() => {
     navigate('OrphanagesDetails')
+  }, [navigate])
+
+  const handleNavigationToCreateOrphanage = useCallback(() => {
+    navigate('SelectMapPosition')
   }, [navigate])
 
   return (
@@ -47,8 +52,8 @@ const OrphanagesMap: React.FC = () => {
       <Footer style={{ elevation: 3 }}>
         <FooterText>1 orfanato encontrado</FooterText>
         <RoundedSquareButton
-          onPress={() => true}
-          name="plus"
+          onPress={handleNavigationToCreateOrphanage}
+          icon="plus"
           size={56}
           color="#ffffff"
           backgroundColor="#15c3d6"

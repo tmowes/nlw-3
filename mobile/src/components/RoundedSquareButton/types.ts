@@ -1,5 +1,5 @@
 export interface RoundedSquareButtonProps {
-  name: string
+  icon: string
   size: number
   color: string
   backgroundColor: string
