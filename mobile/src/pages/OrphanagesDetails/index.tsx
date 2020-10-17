@@ -1,5 +1,9 @@
-import React from 'react'
+import { useRoute } from '@react-navigation/native'
+import React, { useCallback, useEffect, useState } from 'react'
+import { Linking } from 'react-native'
 import LabelButton from '../../components/LabelButton'
+import api from '../../services/api'
+import { OrphanageProps } from '../OrphanagesMap/types'
 import ScheduleItem from './ScheduleItem'
 
 import {
@@ -18,40 +22,58 @@ import {
   Separator,
   ScheduleContainer,
 } from './styles'
+import { OrphanagesDetailsRouteParams } from './types'
 
 const OrphanagesDetails: React.FC = () => {
+  const { params } = useRoute()
+  const [orphanage, setOrphanage] = useState<OrphanageProps>()
+
+  const { id } = params as OrphanagesDetailsRouteParams
+
+  useEffect(() => {
+    const loadOrphanageById = async () => {
+      const { data } = await api.get(`orphanages/${id}`)
+      setOrphanage(data)
+    }
+    loadOrphanageById()
+  }, [id])
+
+  const handleOpenGoogleMapRoutes = useCallback(() => {
+    Linking.openURL(
+      `https://www.google.com/maps/dir/?api=1&destination=${orphanage?.latitude},${orphanage?.longitude}`,
+    )
+  }, [orphanage?.latitude, orphanage?.longitude])
+
+  if (!orphanage) {
+    return (
+      <ScrollContainer>
+        <Title>Carregando...</Title>
+      </ScrollContainer>
+    )
+  }
+
   return (
     <ScrollContainer>
       <ImagesContainer>
         <ScrollImages>
-          <Image
-            source={{
-              uri: 'https://fmnova.com.br/images/noticias/safe_image.jpg',
-            }}
-          />
-          <Image
-            source={{
-              uri: 'https://fmnova.com.br/images/noticias/safe_image.jpg',
-            }}
-          />
-          <Image
-            source={{
-              uri: 'https://fmnova.com.br/images/noticias/safe_image.jpg',
-            }}
-          />
+          {orphanage.images.map(image => (
+            <Image
+              key={image.id}
+              source={{
+                uri: image.url,
+              }}
+            />
+          ))}
         </ScrollImages>
       </ImagesContainer>
       <DetailsContainer>
-        <Title>Orf. Esperança</Title>
-        <Description>
-          Presta assistência a crianças de 06 a 15 anos que se encontre em
-          situação de risco e/ou vulnerabilidade social.
-        </Description>
+        <Title>{orphanage.name}</Title>
+        <Description>{orphanage.about}</Description>
         <MapWrapper>
           <MapContainer
             initialRegion={{
-              latitude: -26.8411135,
-              longitude: -49.2537338,
+              latitude: orphanage.latitude,
+              longitude: orphanage.longitude,
               latitudeDelta: 0.004,
               longitudeDelta: 0.004,
             }}
@@ -62,24 +84,21 @@ const OrphanagesDetails: React.FC = () => {
           >
             <MapMarker
               coordinate={{
-                latitude: -26.8411135,
-                longitude: -49.2537338,
+                latitude: orphanage.latitude,
+                longitude: orphanage.longitude,
               }}
             />
           </MapContainer>
-          <RoutesContainer>
+          <RoutesContainer onPress={handleOpenGoogleMapRoutes}>
             <RoutesText>Ver rotas no Google Maps</RoutesText>
           </RoutesContainer>
         </MapWrapper>
         <Separator />
         <Title>Instruções para visita</Title>
-        <Description>
-          Venha como se sentir a vontade e traga muito amor e paciência para
-          dar.
-        </Description>
+        <Description>{orphanage.instructions}</Description>
         <ScheduleContainer>
           <ScheduleItem
-            label="Segunda à Sexta 8h às 18h"
+            label={`Segunda à Sexta ${orphanage.opening_hours}`}
             icon="clock"
             color="#2AB5D1"
             size={40}
@@ -87,15 +106,27 @@ const OrphanagesDetails: React.FC = () => {
             borderColor="#B3DAE2"
             labelColor="#5C8599"
           />
-          <ScheduleItem
-            label="Atendemos fim de semana"
-            icon="info"
-            color="#39CC83"
-            size={40}
-            backgroundColor="#EDFFF6"
-            borderColor="#A1E9C5"
-            labelColor="#37C77F"
-          />
+          {orphanage.open_on_weekends ? (
+            <ScheduleItem
+              label="Atendemos fim de semana"
+              icon="info"
+              color="#39CC83"
+              size={40}
+              backgroundColor="#EDFFF6"
+              borderColor="#A1E9C5"
+              labelColor="#37C77F"
+            />
+          ) : (
+            <ScheduleItem
+              label="Não atendemos fim de semana"
+              icon="info"
+              color="#FF669D"
+              size={40}
+              backgroundColor="#FEF5F8"
+              borderColor="#FFBCD4"
+              labelColor="#FF669D"
+            />
+          )}
         </ScheduleContainer>
         <LabelButton
           onPress={() => true}

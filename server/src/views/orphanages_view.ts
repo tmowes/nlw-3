@@ -2,6 +2,7 @@ import Orphanage from '../models/Orphanage'
 import imagesView, { ImageViewProps } from './images_view'
 
 interface OrphanageViewProps {
+  id: string
   name: string
   latitude: number
   longitude: number
@@ -15,6 +16,7 @@ interface OrphanageViewProps {
 export default {
   render(orphanage: Orphanage): OrphanageViewProps {
     return {
+      id: orphanage.id,
       name: orphanage.name,
       latitude: orphanage.latitude,
       longitude: orphanage.longitude,

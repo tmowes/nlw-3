@@ -62,7 +62,7 @@ export const MapMarker = styled(Marker).attrs({
   icon: mapMarker,
 })``
 
-export const RoutesContainer = styled.View`
+export const RoutesContainer = styled.TouchableOpacity`
   padding: 16px;
   justify-content: center;
   align-items: center;

@@ -4,7 +4,6 @@ export const ScrollContainer = styled.ScrollView.attrs({
   contentContainerStyle: { padding: 24 },
 })`
   flex: 1;
-  position: relative;
 `
 export const Title = styled.Text`
   font-family: nunito700;
@@ -28,7 +27,7 @@ export const Input = styled.TextInput`
   border-radius: 20px;
   padding: 18px 24px;
   height: 56px;
-  /* text-align-vertical: top; */
+  margin-bottom: 8px;
 `
 
 export const ImagesInput = styled.TouchableOpacity`
@@ -41,6 +40,17 @@ export const ImagesInput = styled.TouchableOpacity`
   align-items: center;
   justify-content: center;
   margin-bottom: 32px;
+`
+
+export const UploadImagesContainer = styled.View`
+  flex-direction: row;
+`
+
+export const UploadImage = styled.Image`
+  width: 64px;
+  height: 64px;
+  border-radius: 20px;
+  margin: 0 0 32px 8px;
 `
 
 export const SwitchContainer = styled.View`

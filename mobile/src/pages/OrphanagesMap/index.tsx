@@ -1,6 +1,5 @@
-/* eslint-disable no-alert */
-import React, { useCallback } from 'react'
-import { useNavigation } from '@react-navigation/native'
+import React, { useCallback, useState } from 'react'
+import { useFocusEffect, useNavigation } from '@react-navigation/native'
 
 import RoundedSquareButton from '../../components/RoundedSquareButton'
 
@@ -14,13 +13,27 @@ import {
   MapContainer,
   MapMarker,
 } from './styles'
+import api from '../../services/api'
+import { OrphanageProps } from './types'
 
 const OrphanagesMap: React.FC = () => {
   const { navigate } = useNavigation()
+  const [orphanages, setOrphanages] = useState<OrphanageProps[]>([])
 
-  const handleNavigationToOrphanagesDetails = useCallback(() => {
-    navigate('OrphanagesDetails')
-  }, [navigate])
+  useFocusEffect(() => {
+    const loadOrphanages = async () => {
+      const { data } = await api.get('orphanages')
+      setOrphanages(data)
+    }
+    loadOrphanages()
+  })
+
+  const handleNavigationToOrphanagesDetails = useCallback(
+    (id: number) => {
+      navigate('OrphanagesDetails', { id })
+    },
+    [navigate],
+  )
 
   const handleNavigationToCreateOrphanage = useCallback(() => {
     navigate('SelectMapPosition')
@@ -36,18 +49,23 @@ const OrphanagesMap: React.FC = () => {
           longitudeDelta: 0.008,
         }}
       >
-        <MapMarker
-          coordinate={{
-            latitude: -26.8411135,
-            longitude: -49.2537338,
-          }}
-        >
-          <CalloutWrapper onPress={() => handleNavigationToOrphanagesDetails()}>
-            <CalloutContainer>
-              <CalloutText>Dev Julius</CalloutText>
-            </CalloutContainer>
-          </CalloutWrapper>
-        </MapMarker>
+        {orphanages.map(orphanage => (
+          <MapMarker
+            key={orphanage.id}
+            coordinate={{
+              latitude: orphanage.latitude,
+              longitude: orphanage.longitude,
+            }}
+          >
+            <CalloutWrapper
+              onPress={() => handleNavigationToOrphanagesDetails(orphanage.id)}
+            >
+              <CalloutContainer>
+                <CalloutText>{orphanage.name}</CalloutText>
+              </CalloutContainer>
+            </CalloutWrapper>
+          </MapMarker>
+        ))}
       </MapContainer>
       <Footer style={{ elevation: 3 }}>
         <FooterText>1 orfanato encontrado</FooterText>
