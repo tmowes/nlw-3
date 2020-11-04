@@ -19,11 +19,7 @@ const App: React.FC = () => {
     return null
   }
 
-  return (
-    <>
-      <AppSrc />
-    </>
-  )
+  return <AppSrc />
 }
 
 export default App

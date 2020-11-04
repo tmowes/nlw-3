@@ -1,10 +1,9 @@
-import { useRoute } from '@react-navigation/native'
 import React, { useCallback, useEffect, useState } from 'react'
 import { Linking } from 'react-native'
-import LabelButton from '../../components/LabelButton'
-import api from '../../services/api'
-import { OrphanageProps } from '../OrphanagesMap/types'
+import { useRoute } from '@react-navigation/native'
+import { LabelButton } from '../../components'
 import ScheduleItem from './ScheduleItem'
+import api from '../../services/api'
 
 import {
   ScrollContainer,
@@ -22,6 +21,7 @@ import {
   Separator,
   ScheduleContainer,
 } from './styles'
+import { OrphanageProps } from '../OrphanagesMap/types'
 import { OrphanagesDetailsRouteParams } from './types'
 
 const OrphanagesDetails: React.FC = () => {
@@ -56,13 +56,8 @@ const OrphanagesDetails: React.FC = () => {
     <ScrollContainer>
       <ImagesContainer>
         <ScrollImages>
-          {orphanage.images.map(image => (
-            <Image
-              key={image.id}
-              source={{
-                uri: image.url,
-              }}
-            />
+          {orphanage.images.map(({ id, url }) => (
+            <Image key={id} source={{ uri: url }} />
           ))}
         </ScrollImages>
       </ImagesContainer>

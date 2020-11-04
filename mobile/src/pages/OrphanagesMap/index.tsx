@@ -20,13 +20,21 @@ const OrphanagesMap: React.FC = () => {
   const { navigate } = useNavigation()
   const [orphanages, setOrphanages] = useState<OrphanageProps[]>([])
 
-  useFocusEffect(() => {
-    const loadOrphanages = async () => {
-      const { data } = await api.get('orphanages')
-      setOrphanages(data)
-    }
-    loadOrphanages()
-  })
+  useFocusEffect(
+    useCallback(() => {
+      let loadingData = true
+      const loadOrphanages = async () => {
+        const { data } = await api.get('orphanages')
+        if (loadingData) {
+          setOrphanages(data)
+        }
+      }
+      loadOrphanages()
+      return () => {
+        loadingData = false
+      }
+    }, []),
+  )
 
   const handleNavigationToOrphanagesDetails = useCallback(
     (id: number) => {
@@ -68,7 +76,7 @@ const OrphanagesMap: React.FC = () => {
         ))}
       </MapContainer>
       <Footer style={{ elevation: 3 }}>
-        <FooterText>1 orfanato encontrado</FooterText>
+        <FooterText>{`${orphanages.length} orfanato encontrado`}</FooterText>
         <RoundedSquareButton
           onPress={handleNavigationToCreateOrphanage}
           icon="plus"
